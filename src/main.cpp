@@ -21,36 +21,31 @@ void setup() {
 }
 
 void loop() {
-  int pirState = digitalRead(PIRPin);
+ int pirState = digitalRead(PIRPin);
   if (pirState == HIGH) {
-    if (!previousPIRState){
+    if (!previousPIRState){                         // pakai (previousPIRState == false) juga bisa
       for (int i = 90; i >= 0; i--) {
-    myservo.write(i);
-    delay(15);
-    }
-    digitalWrite(buzzerPin, HIGH);
-    digitalWrite(ledPin, HIGH); 
-    Serial.println("Sapi Lewat");
-    delay(2000);
-    }
-    
+        myservo.write(i);
+        delay(15);
+        }
+      digitalWrite(buzzerPin, HIGH);
+      digitalWrite(ledPin, HIGH); 
+      Serial.println("Sapi Lewat");
+      delay(2000);
+      }
     previousPIRState = true;
-
   } 
   else {
-
     if(previousPIRState){
       for (int i = 0; i <= 90; i++) {
-       myservo.write(i);
-      delay(15);
-      } 
+        myservo.write(i);
+        delay(15);
+        } 
     digitalWrite(buzzerPin, LOW);
     Serial.println("Tidak ada gerakan - Buzzer OFF"); 
     digitalWrite(ledPin, LOW);
     }
-    
-   previousPIRState = false;
+  previousPIRState = false;
   }
-
-  delay(100);
+delay(100);
 }
